@@ -24,6 +24,10 @@ class ViewController: UIViewController {
             calculateTipAmount()
             calculateTotalAmount()
         }
+        else{
+            tipAmountLabel.text! = "0.0"
+            totalAmountField.text! = "0.0"
+        }
     }
     func calculateTipAmount(){
         let tipAmount = Float(billAmountField.text!)! * (Float(Int(tipSliderValue.value))/100)
