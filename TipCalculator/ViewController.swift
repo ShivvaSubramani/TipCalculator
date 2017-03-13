@@ -10,16 +10,29 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var billAmountField: UITextField!
+  
+    @IBOutlet weak var tipPercentageLabel: UILabel!
+    @IBOutlet weak var tipAmountLabel: UITextField!
+    @IBOutlet weak var totalAmountField: UITextField!
+    @IBOutlet weak var tipSliderValue: UISlider!
+    @IBAction func tipSliderChanged(_ sender: UISlider) {
+        tipPercentageLabel.text! = "Tip Percentage " + String(Int(sender.value)) + "%"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func calculateButtonPressed(_ sender: UIButton) {
+        if (Float(billAmountField.text!) != nil){
+            calculateTipAmount()
+            calculateTotalAmount()
+        }
     }
-
-
+    func calculateTipAmount(){
+        let tipAmount = Float(billAmountField.text!)! * (Float(Int(tipSliderValue.value))/100)
+        tipAmountLabel.text! = String(tipAmount)
+    }
+    func calculateTotalAmount(){
+        let totalAmount = Float(billAmountField.text!)! + Float(tipAmountLabel.text!)!
+        totalAmountField.text! = String(totalAmount)
+        
+    }
 }
 
